@@ -9,14 +9,14 @@ interface TokenSectionProps {
   vaultAddress: `0x${string}`
 }
 
-const tokenConfigs: Record<'USDC' | 'cbBTC', Token> = {
+const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> = {
   USDC: {
     name: 'USDC',
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
     symbol: 'USDC',
     decimals: 6,
     chainId: 8453,
-    image: 'https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png'
+    image: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png'
   },
   cbBTC: {
     name: 'Bitcoin',
@@ -24,7 +24,7 @@ const tokenConfigs: Record<'USDC' | 'cbBTC', Token> = {
     symbol: 'BTC',
     decimals: 8,
     chainId: 8453,
-    image: '/cbBTC.png'
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
   }
 }
 
@@ -47,11 +47,12 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
         <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center gap-2 sm:gap-3">
             <Image 
-              src={tokenConfigs[token].image || ''}
+              src={tokenConfigs[token].image}
               alt={token} 
               width={32}
               height={32}
               className="w-6 h-6 sm:w-8 sm:h-8"
+              unoptimized
             />
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               {tokenConfigs[token].name}
@@ -85,16 +86,9 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
               <div className="mt-3 sm:mt-4">
                 <button
                   onClick={() => setShowBuyFlow(true)}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
+                  className="w-full px-4 py-3 bg-[#5155F7] hover:bg-[#4146E5] text-white rounded-xl transition-colors flex items-center justify-center gap-2 font-semibold text-[15px]"
                 >
-                  <span>Buy {tokenConfigs[token].name}</span>
-                  <Image 
-                    src="https://assets.coinbase.com/images/favicon.ico"
-                    alt="Coinbase"
-                    width={16}
-                    height={16}
-                    className="w-3 h-3 sm:w-4 sm:h-4"
-                  />
+                  Buy {tokenConfigs[token].name}
                 </button>
               </div>
             </div>
