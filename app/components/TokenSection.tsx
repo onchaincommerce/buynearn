@@ -85,7 +85,7 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
               <div className="mt-3 sm:mt-4">
                 <button
                   onClick={() => setShowBuyFlow(true)}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
                 >
                   <span>Buy {tokenConfigs[token].name}</span>
                   <Image 
