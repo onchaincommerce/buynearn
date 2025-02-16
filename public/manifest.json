@@ -2,11 +2,20 @@
   "name": "Buy & Earn",
   "short_name": "Buy & Earn",
   "description": "Buy and earn yield on Base",
-  "start_url": "/",
+  "start_url": "/?standalone=true",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#1a1a1a",
   "orientation": "portrait",
+  "scope": "/",
+  "dir": "ltr",
+  "lang": "en-US",
+  "display_override": ["standalone", "fullscreen"],
+  "categories": ["finance", "utilities"],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
@@ -55,6 +64,18 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Buy USDC",
+      "url": "/?token=USDC",
+      "icons": [{ "src": "/icons/usdc.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Buy Bitcoin",
+      "url": "/?token=cbBTC",
+      "icons": [{ "src": "/icons/btc.png", "sizes": "96x96" }]
     }
   ]
 } 
