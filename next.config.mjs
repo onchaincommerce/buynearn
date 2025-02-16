@@ -6,6 +6,20 @@ const nextConfig = {
       config.externals.push('pino-pretty', 'lokijs', 'encoding');
       return config;
     },
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'raw.githubusercontent.com',
+          pathname: '/Uniswap/assets/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'assets.coinbase.com',
+          pathname: '/images/**',
+        },
+      ],
+    },
   };
   
   export default nextConfig;

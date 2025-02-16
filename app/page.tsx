@@ -16,13 +16,11 @@ import TokenSection from './components/TokenSection';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { base } from 'viem/chains';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 function FloatingLogos() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const baseLogoRef = useRef<HTMLImageElement>(null);
-  const cbBTCLogoRef = useRef<HTMLImageElement>(null);
   const mousePos = useRef({ x: 0, y: 0 });
-  const explosionParticles = useRef<HTMLDivElement[]>([]);
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -33,7 +31,6 @@ function FloatingLogos() {
     };
 
     const handleClick = (e: MouseEvent) => {
-      // Create explosion particles
       const particleCount = 12;
       const container = document.createElement('div');
       container.style.position = 'fixed';
@@ -46,8 +43,7 @@ function FloatingLogos() {
       document.body.appendChild(container);
 
       for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('img');
-        particle.src = '/base-logo.png';
+        const particle = document.createElement('div');
         particle.style.position = 'absolute';
         particle.style.width = '20px';
         particle.style.height = '20px';
@@ -55,20 +51,24 @@ function FloatingLogos() {
         particle.style.top = `${e.clientY}px`;
         particle.style.transition = 'all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)';
         particle.style.opacity = '1';
+        
+        const img = document.createElement('img');
+        img.src = '/base-logo.png';
+        img.alt = 'Base';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        particle.appendChild(img);
         container.appendChild(particle);
 
-        // Calculate random direction
         const angle = (i * 360) / particleCount;
         const distance = 100;
         const rad = angle * Math.PI / 180;
         
-        // Animate particle
         setTimeout(() => {
           particle.style.transform = `translate(${Math.cos(rad) * distance}px, ${Math.sin(rad) * distance}px) rotate(${angle}deg)`;
           particle.style.opacity = '0';
         }, 0);
 
-        // Clean up particle
         setTimeout(() => {
           container.remove();
         }, 1000);
@@ -78,7 +78,6 @@ function FloatingLogos() {
     const animate = () => {
       if (!baseLogoRef.current) return;
       
-      // Smooth follow effect for base logo
       const speed = 0.1;
       const rect = baseLogoRef.current.getBoundingClientRect();
       const targetX = mousePos.current.x - rect.width / 2;
@@ -108,15 +107,18 @@ function FloatingLogos() {
   
   return (
     <>
-      <img
-        ref={baseLogoRef}
+      <Image
+        ref={baseLogoRef as any}
         src="/base-logo.png"
         alt="Base"
+        width={40}
+        height={40}
         className="fixed w-10 h-10 transition-all duration-75 ease-out hover:scale-110 pointer-events-none z-[9999]"
         style={{ 
           filter: 'brightness(0.8) contrast(1.2)',
           transform: 'translate(-50px, -50px)'
         }}
+        priority
       />
     </>
   );
@@ -183,11 +185,11 @@ export default function App() {
             <div className="grid md:grid-cols-3 gap-8 mt-16 relative z-10">
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-transform">
                 <h3 className="text-xl font-bold mb-3">🔒 Secure by Design</h3>
-                <p className="text-blue-200">Built on Base with institutional-grade security. Your assets are protected by Coinbase's battle-tested infrastructure.</p>
+                <p className="text-blue-200">Built on Base with institutional-grade security. Your assets are protected by Coinbase&apos;s battle-tested infrastructure.</p>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-transform">
                 <h3 className="text-xl font-bold mb-3">💰 Optimized Returns</h3>
-                <p className="text-blue-200">Earn competitive yields through Morpho's efficient lending protocol. Maximum returns with minimal risk.</p>
+                <p className="text-blue-200">Earn competitive yields through Morpho&apos;s efficient lending protocol. Maximum returns with minimal risk.</p>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-transform">
                 <h3 className="text-xl font-bold mb-3">⚡ Instant Access</h3>

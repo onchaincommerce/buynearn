@@ -2,6 +2,7 @@ import { Buy } from '@coinbase/onchainkit/buy'
 import { Earn } from '@coinbase/onchainkit/earn'
 import type { Token } from '@coinbase/onchainkit/token'
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface TokenSectionProps {
   token: 'USDC' | 'cbBTC'
@@ -45,9 +46,11 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <img 
-              src={tokenConfigs[token].image || undefined}
+            <Image 
+              src={tokenConfigs[token].image || ''}
               alt={token} 
+              width={32}
+              height={32}
               className="w-8 h-8"
             />
             <h2 className="text-2xl font-bold text-white">
@@ -88,9 +91,11 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
                   className="w-full px-4 py-3 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
                 >
                   <span>Buy {tokenConfigs[token].name}</span>
-                  <img 
-                    src="https://assets.coinbase.com/images/favicon.ico" 
-                    alt="Coinbase" 
+                  <Image 
+                    src="https://assets.coinbase.com/images/favicon.ico"
+                    alt="Coinbase"
+                    width={16}
+                    height={16}
                     className="w-4 h-4"
                   />
                 </button>
