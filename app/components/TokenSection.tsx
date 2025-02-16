@@ -30,7 +30,6 @@ const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> = {
 
 export default function TokenSection({ token, vaultAddress }: TokenSectionProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const [showBuyFlow, setShowBuyFlow] = useState(false)
 
   return (
     <div 
@@ -62,37 +61,15 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
         {/* Component Display */}
         <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full [&_*]:!z-[60]">
-          {showBuyFlow ? (
-            <div className="animate-fadeIn space-y-3 sm:space-y-4">
-              <div className="flex items-center justify-between mb-3 sm:mb-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setShowBuyFlow(false)}
-                    className="text-white/60 hover:text-white transition-colors p-2 -ml-2"
-                  >
-                    ←
-                  </button>
-                  <h3 className="text-base sm:text-lg font-semibold text-white">Buy {tokenConfigs[token].name}</h3>
-                </div>
-              </div>
+          <div className="animate-fadeIn space-y-3 sm:space-y-4">
+            <Earn vaultAddress={vaultAddress} />
+            <div className="mt-6 sm:mt-8">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored
               />
             </div>
-          ) : (
-            <div className="animate-fadeIn space-y-3 sm:space-y-4">
-              <Earn vaultAddress={vaultAddress} />
-              <div className="mt-3 sm:mt-4">
-                <button
-                  onClick={() => setShowBuyFlow(true)}
-                  className="w-full px-4 py-3 bg-[#5155F7] hover:bg-[#4146E5] text-white rounded-xl transition-colors flex items-center justify-center gap-2 font-semibold text-[15px]"
-                >
-                  Buy {tokenConfigs[token].name}
-                </button>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
