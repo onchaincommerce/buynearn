@@ -34,7 +34,7 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
   return (
     <div 
-      className="relative overflow-visible w-full max-w-md mx-auto p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105"
+      className="relative overflow-visible w-full max-w-md mx-auto p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ isolation: 'isolate' }}
@@ -44,16 +44,16 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Image 
               src={tokenConfigs[token].image || ''}
               alt={token} 
               width={32}
               height={32}
-              className="w-8 h-8"
+              className="w-6 h-6 sm:w-8 sm:h-8"
             />
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               {tokenConfigs[token].name}
             </h2>
           </div>
@@ -62,19 +62,16 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
         {/* Component Display */}
         <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full [&_*]:!z-[60]">
           {showBuyFlow ? (
-            <div className="animate-fadeIn space-y-4">
-              <div className="flex items-center justify-between mb-4">
+            <div className="animate-fadeIn space-y-3 sm:space-y-4">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setShowBuyFlow(false)}
-                    className="text-white/60 hover:text-white transition-colors"
+                    className="text-white/60 hover:text-white transition-colors p-2 -ml-2"
                   >
                     ←
                   </button>
-                  <h3 className="text-lg font-semibold text-white">Buy {tokenConfigs[token].name}</h3>
-                </div>
-                <div className="text-sm text-white/60">
-                  to start earning yield
+                  <h3 className="text-base sm:text-lg font-semibold text-white">Buy {tokenConfigs[token].name}</h3>
                 </div>
               </div>
               <Buy 
@@ -83,12 +80,12 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
               />
             </div>
           ) : (
-            <div className="animate-fadeIn space-y-4">
+            <div className="animate-fadeIn space-y-3 sm:space-y-4">
               <Earn vaultAddress={vaultAddress} />
-              <div className="mt-4">
+              <div className="mt-3 sm:mt-4">
                 <button
                   onClick={() => setShowBuyFlow(true)}
-                  className="w-full px-4 py-3 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
                 >
                   <span>Buy {tokenConfigs[token].name}</span>
                   <Image 
@@ -96,7 +93,7 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
                     alt="Coinbase"
                     width={16}
                     height={16}
-                    className="w-4 h-4"
+                    className="w-3 h-3 sm:w-4 sm:h-4"
                   />
                 </button>
               </div>
