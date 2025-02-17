@@ -42,17 +42,17 @@ export default function TokenCarousel() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden pb-12">
       <div 
         ref={containerRef}
-        className="flex transition-transform duration-300 ease-out touch-pan-x"
+        className="flex transition-transform duration-300 ease-out touch-pan-x px-2"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {tokens.map((token) => (
-          <div key={token} className="w-full flex-shrink-0">
+          <div key={token} className="w-full flex-shrink-0 px-2">
             <TokenSection 
               token={token} 
               vaultAddress={defaultVaults[token] as `0x${string}`}
@@ -62,17 +62,19 @@ export default function TokenCarousel() {
       </div>
 
       {/* Pagination dots */}
-      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
-        {tokens.map((_, index) => (
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 py-4">
+        {tokens.map((token, index) => (
           <button
             key={index}
-            className={`w-2 h-2 rounded-full transition-all ${
+            className={`w-2.5 h-2.5 rounded-full transition-all ${
               index === currentIndex 
                 ? 'bg-white scale-125' 
                 : 'bg-white/50 hover:bg-white/75'
             }`}
             onClick={() => setCurrentIndex(index)}
-          />
+          >
+            <span className="sr-only">View {token}</span>
+          </button>
         ))}
       </div>
     </div>

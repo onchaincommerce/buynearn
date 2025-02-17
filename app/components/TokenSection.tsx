@@ -27,12 +27,12 @@ export const tokenConfigs: Record<'USDC' | 'cbBTC' | 'ETH', Token & { image: str
     image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
   },
   ETH: {
-    name: 'Ethereum',
+    name: 'Wrapped ETH',
     address: '0x4200000000000000000000000000000000000006',
-    symbol: 'ETH',
+    symbol: 'WETH',
     decimals: 18,
     chainId: 8453,
-    image: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
+    image: 'https://assets.coingecko.com/coins/images/2518/large/weth.png'
   }
 }
 
@@ -99,7 +99,7 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
 
   return (
     <div 
-      className="relative overflow-visible w-full max-w-md mx-auto p-1.5 sm:p-6 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105 touch-pan-x"
+      className="relative overflow-visible w-full max-w-md mx-auto p-2 sm:p-8 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105 touch-pan-x"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ isolation: 'isolate' }}
@@ -109,25 +109,25 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-1 sm:mb-6">
-          <div className="flex items-center gap-1 sm:gap-3">
+        <div className="flex items-center justify-between mb-3 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Image 
               src={tokenConfigs[token].image}
               alt={token} 
               width={32}
               height={32}
-              className="w-6 h-6 sm:w-8 sm:h-8"
+              className="w-8 h-8 sm:w-10 sm:h-10"
               unoptimized
             />
-            <h2 className="text-lg sm:text-2xl font-bold text-white">
+            <h2 className="text-xl sm:text-3xl font-bold text-white">
               {tokenConfigs[token].name}
             </h2>
           </div>
-          <div className="flex flex-col items-end gap-1">
+          <div className="flex flex-col items-end gap-2">
             <select
               value={selectedVault.address}
               onChange={(e) => setSelectedVault(vaultConfigs[token].find(v => v.address === e.target.value)!)}
-              className="text-xs sm:text-sm px-2 py-1 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-sm sm:text-base px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {vaultConfigs[token].map((vault) => (
                 <option key={vault.address} value={vault.address} className="bg-gray-900">
@@ -135,7 +135,7 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
                 </option>
               ))}
             </select>
-            <div className="text-[10px] sm:text-xs text-blue-200 opacity-75">
+            <div className="text-xs sm:text-sm text-blue-200 opacity-75">
               Select a vault to view APY
             </div>
           </div>
@@ -143,11 +143,11 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
 
         {/* Component Display */}
         <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full">
-          <div className="animate-fadeIn space-y-1 sm:space-y-4">
-            <div className="scale-[0.9] sm:scale-100 origin-top -mx-1 sm:mx-0 relative z-20">
+          <div className="animate-fadeIn space-y-4 sm:space-y-6">
+            <div className="scale-[0.95] sm:scale-100 origin-top relative z-20">
               <Earn vaultAddress={selectedVault.address} />
             </div>
-            <div className="mt-2 sm:mt-8 scale-[0.9] sm:scale-100 origin-top -mx-1 sm:mx-0 relative z-30">
+            <div className="mt-4 sm:mt-10 scale-[0.95] sm:scale-100 origin-top relative z-30">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored
