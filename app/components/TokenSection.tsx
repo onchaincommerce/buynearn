@@ -33,27 +33,27 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
   return (
     <div 
-      className="relative overflow-visible w-full max-w-md mx-auto p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105"
+      className="relative overflow-visible w-full max-w-md mx-auto p-2 sm:p-6 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ isolation: 'isolate' }}
     >
       {/* Background animation */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${token === 'USDC' ? 'from-blue-500/20 to-green-500/20' : 'from-orange-500/20 to-yellow-500/20'} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-xl sm:rounded-2xl`} />
+      <div className={`absolute inset-0 bg-gradient-to-r ${token === 'USDC' ? 'from-blue-500/20 to-green-500/20' : 'from-orange-500/20 to-yellow-500/20'} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-lg sm:rounded-2xl`} />
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-3 sm:mb-6">
-          <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center justify-between mb-2 sm:mb-6">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <Image 
               src={tokenConfigs[token].image}
               alt={token} 
               width={32}
               height={32}
-              className="w-5 h-5 sm:w-8 sm:h-8"
+              className="w-4 h-4 sm:w-8 sm:h-8"
               unoptimized
             />
-            <h2 className="text-lg sm:text-2xl font-bold text-white">
+            <h2 className="text-base sm:text-2xl font-bold text-white">
               {tokenConfigs[token].name}
             </h2>
           </div>
@@ -62,10 +62,10 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
         {/* Component Display */}
         <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full [&_*]:!z-[60]">
           <div className="animate-fadeIn space-y-2 sm:space-y-4">
-            <div className="scale-[0.92] sm:scale-100 origin-top">
+            <div className="scale-[0.85] sm:scale-100 origin-top -mx-1 sm:mx-0">
               <Earn vaultAddress={vaultAddress} />
             </div>
-            <div className="mt-4 sm:mt-8 scale-[0.92] sm:scale-100 origin-top">
+            <div className="mt-2 sm:mt-8 scale-[0.85] sm:scale-100 origin-top -mx-1 sm:mx-0">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored
