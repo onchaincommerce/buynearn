@@ -15,7 +15,7 @@ import {
 import TokenSection from './components/TokenSection';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { base } from 'viem/chains';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AddToHomeScreen from './components/AddToHomeScreen';
 
@@ -126,6 +126,16 @@ function FloatingLogos() {
 }
 
 export default function App() {
+  const [isStandalone, setIsStandalone] = useState(false);
+
+  useEffect(() => {
+    // Check if in standalone mode
+    const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || 
+                              (window.navigator as any).standalone || 
+                              document.referrer.includes('android-app://');
+    setIsStandalone(isInStandaloneMode);
+  }, []);
+
   return (
     <OnchainKitProvider 
       chain={base}
@@ -137,10 +147,12 @@ export default function App() {
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header with wallet */}
           <header className="py-4 sm:py-6 flex justify-between items-center relative z-40">
-            <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Buy & Earn
-            </h1>
-            <div className="wallet-container scale-90 sm:scale-100 origin-right">
+            {!isStandalone && (
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Buy & Earn
+              </h1>
+            )}
+            <div className={`wallet-container scale-90 sm:scale-100 origin-right ${isStandalone ? 'ml-auto mt-6' : ''}`}>
               <Wallet>
                 <ConnectWallet>
                   <Avatar className="h-6 w-6" />
