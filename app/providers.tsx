@@ -7,10 +7,12 @@ import type { ReactNode } from 'react';
 export function Providers(props: { children: ReactNode }) {
   return (
     <OnchainKitProvider
+      chain={base}
+      projectId={process.env.NEXT_PUBLIC_COINBASE_SPONSORED_PROJECT_ID}
       apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-          chain={base}
-          config={{ appearance: { 
-            mode: 'auto',
+      config={{ 
+        appearance: { 
+          mode: 'auto',
         }
       }}
     >

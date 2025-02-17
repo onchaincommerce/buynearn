@@ -128,8 +128,8 @@ export default function App() {
   return (
     <OnchainKitProvider 
       chain={base}
-      projectId={process.env.NEXT_PUBLIC_COINBASE_PROJECT_ID}
-      apiKey={process.env.NEXT_PUBLIC_COINBASE_PROJECT_ID}
+      projectId={process.env.NEXT_PUBLIC_COINBASE_SPONSORED_PROJECT_ID}
+      apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
     >
       <FloatingLogos />
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
