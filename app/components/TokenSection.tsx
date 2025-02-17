@@ -9,7 +9,7 @@ interface TokenSectionProps {
   vaultAddress: `0x${string}`
 }
 
-const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> = {
+export const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> = {
   USDC: {
     name: 'USDC',
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',

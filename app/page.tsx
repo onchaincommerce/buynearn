@@ -12,7 +12,7 @@ import {
   Identity,
   EthBalance,
 } from '@coinbase/onchainkit/identity';
-import TokenSection from './components/TokenSection';
+import TokenSection, { tokenConfigs } from './components/TokenSection';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { base } from 'viem/chains';
 import { useEffect, useRef, useState } from 'react';
@@ -147,11 +147,6 @@ export default function App() {
         <div className="container mx-auto px-2 sm:px-4 max-w-6xl">
           {/* Header with wallet */}
           <header className="pt-12 sm:pt-6 pb-4 sm:pb-6 flex justify-center items-center relative z-40">
-            {!isStandalone && (
-              <h1 className="absolute left-2 sm:left-4 text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Buy & Earn
-              </h1>
-            )}
             <div className={`wallet-container scale-90 sm:scale-100 origin-center ${isStandalone ? 'mt-0' : ''}`}>
               <Wallet>
                 <ConnectWallet>
@@ -174,27 +169,67 @@ export default function App() {
           <main className="py-4 sm:py-12">
             {/* Hero section */}
             <div className="text-center mb-6 sm:mb-16 relative px-2 sm:px-4">
-              <h2 className="text-2xl sm:text-5xl font-bold mb-3 sm:mb-6">
-                Buy & Earn on Base
+              <h2 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-6">
+                Instantly Buy USDC and BTC without KYC and earn yield
               </h2>
-              <p className="text-base sm:text-xl text-blue-200 max-w-2xl mx-auto">
-                Buy USDC and Bitcoin instantly, then earn yield on Base. Connect your wallet and watch your assets grow.
-              </p>
+              {!isStandalone && (
+                <p className="text-base sm:text-xl text-blue-200 max-w-2xl mx-auto">
+                  Add to home screen to start buying and earning. No KYC required, just connect your wallet and start earning competitive yields on Base.
+                </p>
+              )}
             </div>
 
-            {/* Token sections */}
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
-              <TokenSection
-                token="USDC"
-                vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
-              />
-              <TokenSection
-                token="cbBTC"
-                vaultAddress={"0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796" as `0x${string}`}
-              />
-            </div>
+            {isStandalone ? (
+              /* Token sections - Only shown in standalone mode */
+              <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
+                <TokenSection
+                  token="USDC"
+                  vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
+                />
+                <TokenSection
+                  token="cbBTC"
+                  vaultAddress={"0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796" as `0x${string}`}
+                />
+              </div>
+            ) : (
+              /* Info sections - Only shown in browser mode */
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
+                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Image 
+                      src={tokenConfigs.USDC.image}
+                      alt="USDC"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8"
+                      unoptimized
+                    />
+                    <h3 className="text-xl font-bold">USDC</h3>
+                  </div>
+                  <p className="text-blue-200 mb-2">• Buy instantly with card or Coinbase account</p>
+                  <p className="text-blue-200 mb-2">• Earn {8.44}% APY through Morpho</p>
+                  <p className="text-blue-200">• Withdraw anytime, no lockup period</p>
+                </div>
+                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Image 
+                      src={tokenConfigs.cbBTC.image}
+                      alt="Bitcoin"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8"
+                      unoptimized
+                    />
+                    <h3 className="text-xl font-bold">Bitcoin</h3>
+                  </div>
+                  <p className="text-blue-200 mb-2">• Buy BTC without exchange signup</p>
+                  <p className="text-blue-200 mb-2">• Earn yield on your Bitcoin</p>
+                  <p className="text-blue-200">• Fully backed by real BTC</p>
+                </div>
+              </div>
+            )}
 
-            {/* Features section */}
+            {/* Features section - Always shown */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8 mt-6 sm:mt-16 relative z-10">
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
                 <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">🔒 Secure by Design</h3>
