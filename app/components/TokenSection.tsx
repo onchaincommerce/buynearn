@@ -124,19 +124,45 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
             </h2>
           </div>
           <div className="flex flex-col items-end gap-2">
-            <select
-              value={selectedVault.address}
-              onChange={(e) => setSelectedVault(vaultConfigs[token].find(v => v.address === e.target.value)!)}
-              className="text-sm sm:text-base px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {vaultConfigs[token].map((vault) => (
-                <option key={vault.address} value={vault.address} className="bg-gray-900">
-                  {vault.name}
-                </option>
-              ))}
-            </select>
+            <div className="relative group">
+              <select
+                value={selectedVault.address}
+                onChange={(e) => setSelectedVault(vaultConfigs[token].find(v => v.address === e.target.value)!)}
+                className="appearance-none text-sm sm:text-base px-3 py-1.5 pr-8 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer backdrop-blur-sm hover:bg-white/20 transition-colors"
+                style={{
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none'
+                }}
+              >
+                {vaultConfigs[token].map((vault) => (
+                  <option 
+                    key={vault.address} 
+                    value={vault.address} 
+                    className="bg-gray-900/95 backdrop-blur-sm"
+                  >
+                    {vault.name}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-white/80">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="transition-transform group-hover:translate-y-0.5"
+                >
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
             <div className="text-xs sm:text-sm text-blue-200 opacity-75">
-              Select a vault to view APY
+              {vaultConfigs[token].length} vaults available
             </div>
           </div>
         </div>
