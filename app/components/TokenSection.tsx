@@ -60,12 +60,12 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
         </div>
 
         {/* Component Display */}
-        <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full [&_*]:!z-[60]">
+        <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full">
           <div className="animate-fadeIn space-y-1.5 sm:space-y-4">
-            <div className="scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0">
+            <div className="scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0 relative z-20">
               <Earn vaultAddress={vaultAddress} />
             </div>
-            <div className="mt-1.5 sm:mt-8 scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0">
+            <div className="mt-1.5 sm:mt-8 scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0 relative z-30">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored

@@ -17,6 +17,7 @@ import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { base } from 'viem/chains';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import AddToHomeScreen from './components/AddToHomeScreen';
 
 function FloatingLogos() {
   const baseLogoRef = useRef<HTMLImageElement>(null);
@@ -135,7 +136,7 @@ export default function App() {
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header with wallet */}
-          <header className="py-4 sm:py-6 flex justify-between items-center relative z-50">
+          <header className="py-4 sm:py-6 flex justify-between items-center relative z-40">
             <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Buy & Earn
             </h1>
@@ -199,6 +200,7 @@ export default function App() {
           </main>
         </div>
       </div>
+      <AddToHomeScreen />
     </OnchainKitProvider>
   );
 }
