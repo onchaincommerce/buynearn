@@ -12,7 +12,7 @@ export default function TokenCarousel() {
   const defaultVaults = {
     USDC: '0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A',
     cbBTC: '0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796',
-    ETH: '0x2371e134e3455e0593363cBF89d3b6cf53740618'
+    ETH: '0xa0E430870c4604CcfC7B38Ca7845B1FF653D0ff1'
   } as const;
 
   const handleTouchStart = (e: React.TouchEvent) => {

@@ -27,12 +27,12 @@ export const tokenConfigs: Record<'USDC' | 'cbBTC' | 'ETH', Token & { image: str
     image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
   },
   ETH: {
-    name: 'Wrapped ETH',
+    name: 'Ethereum',
     address: '0x4200000000000000000000000000000000000006',
-    symbol: 'WETH',
+    symbol: 'ETH',
     decimals: 18,
     chainId: 8453,
-    image: 'https://assets.coingecko.com/coins/images/2518/large/weth.png'
+    image: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
   }
 }
 
@@ -40,15 +40,15 @@ const vaultConfigs = {
   USDC: [
     {
       address: '0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A' as `0x${string}`,
-      name: 'Morpho Vault 1'
+      name: 'Spark Vault'
     },
     {
       address: '0xc1256Ae5FF1cf2719D4937adb3bbCCab2E00A2Ca' as `0x${string}`,
-      name: 'Morpho Vault 2'
+      name: 'Moonwell Vault'
     },
     {
       address: '0x616a4E1db48e22028f6bbf20444Cd3b8e3273738' as `0x${string}`,
-      name: 'Morpho Vault 3'
+      name: 'Seamless Vault'
     },
     {
       address: '0x23479229e52Ab6aaD312D0B03DF9F33B46753B5e' as `0x${string}`,
@@ -58,11 +58,11 @@ const vaultConfigs = {
   cbBTC: [
     {
       address: '0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796' as `0x${string}`,
-      name: 'Morpho Vault 1'
+      name: 'Moonwell Vault'
     },
     {
       address: '0x5a47C803488FE2BB0A0EAaf346b420e4dF22F3C7' as `0x${string}`,
-      name: 'Morpho Vault 2'
+      name: 'Seamless Vault'
     },
     {
       address: '0x6770216aC60F634483Ec073cBABC4011c94307Cb' as `0x${string}`,
@@ -71,16 +71,16 @@ const vaultConfigs = {
   ],
   ETH: [
     {
-      address: '0x2371e134e3455e0593363cBF89d3b6cf53740618' as `0x${string}`,
-      name: 'Morpho Vault 1'
+      address: '0xa0E430870c4604CcfC7B38Ca7845B1FF653D0ff1' as `0x${string}`,
+      name: 'Moonwell Vault'
     },
     {
-      address: '0x78Fc2c2eD1A4cDb5402365934aE5648aDAd094d0' as `0x${string}`,
-      name: 'Morpho Vault 2'
+      address: '0x6b13c060F13Af1fdB319F52315BbbF3fb1D88844' as `0x${string}`,
+      name: 'Gauntlet Vault'
     },
     {
-      address: '0xBEEf050ecd6a16c4e7bfFbB52Ebba7846C4b8cD4' as `0x${string}`,
-      name: 'Morpho Vault 3'
+      address: '0x5A32099837D89E3a794a44fb131CBbAD41f87a8C' as `0x${string}`,
+      name: 'Ionic Vault'
     }
   ]
 };
