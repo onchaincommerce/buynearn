@@ -43,17 +43,17 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-1.5 sm:mb-6">
+        <div className="flex items-center justify-between mb-1 sm:mb-6">
           <div className="flex items-center gap-1 sm:gap-3">
             <Image 
               src={tokenConfigs[token].image}
               alt={token} 
               width={32}
               height={32}
-              className="w-3.5 h-3.5 sm:w-8 sm:h-8"
+              className="w-4 h-4 sm:w-8 sm:h-8"
               unoptimized
             />
-            <h2 className="text-sm sm:text-2xl font-bold text-white">
+            <h2 className="text-base sm:text-2xl font-bold text-white">
               {tokenConfigs[token].name}
             </h2>
           </div>
@@ -61,11 +61,11 @@ export default function TokenSection({ token, vaultAddress }: TokenSectionProps)
 
         {/* Component Display */}
         <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full">
-          <div className="animate-fadeIn space-y-1.5 sm:space-y-4">
-            <div className="scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0 relative z-20">
+          <div className="animate-fadeIn space-y-1 sm:space-y-4">
+            <div className="scale-[0.85] sm:scale-100 origin-top -mx-1 sm:mx-0 relative z-20">
               <Earn vaultAddress={vaultAddress} />
             </div>
-            <div className="mt-1.5 sm:mt-8 scale-[0.75] sm:scale-100 origin-top -mx-2 sm:mx-0 relative z-30">
+            <div className="mt-1 sm:mt-8 scale-[0.85] sm:scale-100 origin-top -mx-1 sm:mx-0 relative z-30">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored

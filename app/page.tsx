@@ -146,13 +146,13 @@ export default function App() {
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
         <div className="container mx-auto px-2 sm:px-4 max-w-6xl">
           {/* Header with wallet */}
-          <header className="py-4 sm:py-6 flex justify-center items-center relative z-40">
+          <header className="pt-12 sm:pt-6 pb-4 sm:pb-6 flex justify-center items-center relative z-40">
             {!isStandalone && (
               <h1 className="absolute left-2 sm:left-4 text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Buy & Earn
               </h1>
             )}
-            <div className={`wallet-container scale-90 sm:scale-100 origin-center ${isStandalone ? 'mt-6' : ''}`}>
+            <div className={`wallet-container scale-90 sm:scale-100 origin-center ${isStandalone ? 'mt-0' : ''}`}>
               <Wallet>
                 <ConnectWallet>
                   <Avatar className="h-6 w-6" />
@@ -171,19 +171,19 @@ export default function App() {
           </header>
 
           {/* Main content */}
-          <main className="py-6 sm:py-12">
+          <main className="py-4 sm:py-12">
             {/* Hero section */}
-            <div className="text-center mb-8 sm:mb-16 relative px-2 sm:px-4">
-              <h2 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6">
+            <div className="text-center mb-6 sm:mb-16 relative px-2 sm:px-4">
+              <h2 className="text-2xl sm:text-5xl font-bold mb-3 sm:mb-6">
                 Buy & Earn on Base
               </h2>
-              <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto">
+              <p className="text-base sm:text-xl text-blue-200 max-w-2xl mx-auto">
                 Buy USDC and Bitcoin instantly, then earn yield on Base. Connect your wallet and watch your assets grow.
               </p>
             </div>
 
             {/* Token sections */}
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mt-4 sm:mt-8 relative z-20">
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
               <TokenSection
                 token="USDC"
                 vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
@@ -195,17 +195,17 @@ export default function App() {
             </div>
 
             {/* Features section */}
-            <div className="grid md:grid-cols-3 gap-3 sm:gap-8 mt-8 sm:mt-16 relative z-10">
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">🔒 Secure by Design</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8 mt-6 sm:mt-16 relative z-10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
+                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">🔒 Secure by Design</h3>
                 <p className="text-sm sm:text-base text-blue-200">Built on Base with institutional-grade security. Your assets are protected by Coinbase&apos;s battle-tested infrastructure.</p>
               </div>
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">💰 Optimized Returns</h3>
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
+                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">💰 Optimized Returns</h3>
                 <p className="text-sm sm:text-base text-blue-200">Earn competitive yields through Morpho&apos;s efficient lending protocol. Maximum returns with minimal risk.</p>
               </div>
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">⚡ Instant Access</h3>
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
+                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">⚡ Instant Access</h3>
                 <p className="text-sm sm:text-base text-blue-200">Buy tokens directly with your card or Coinbase account. Deposit and withdraw anytime with no lockup periods.</p>
               </div>
             </div>
