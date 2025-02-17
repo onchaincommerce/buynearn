@@ -142,111 +142,83 @@ export default function App() {
       projectId={process.env.NEXT_PUBLIC_COINBASE_SPONSORED_PROJECT_ID}
       apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
     >
-      <FloatingLogos />
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
-        <div className="container mx-auto px-2 sm:px-4 max-w-6xl">
-          {/* Header with wallet */}
-          <header className="pt-12 sm:pt-6 pb-4 sm:pb-6 flex justify-center items-center relative z-40">
-            <div className={`wallet-container scale-90 sm:scale-100 origin-center ${isStandalone ? 'mt-0' : ''}`}>
-              <Wallet>
-                <ConnectWallet>
-                  <Avatar className="h-6 w-6" />
-                  <Name />
-                </ConnectWallet>
-                <WalletDropdown>
-                  <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
-                    <Avatar />
-                    <Name />
-                    <EthBalance />
-                  </Identity>
-                  <WalletDropdownDisconnect />
-                </WalletDropdown>
-              </Wallet>
-            </div>
-          </header>
-
-          {/* Main content */}
-          <main className="py-4 sm:py-12">
-            {/* Hero section */}
-            <div className="text-center mb-6 sm:mb-16 relative px-2 sm:px-4">
-              <h2 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-6">
-                Instantly Buy USDC and BTC without KYC and earn yield
-              </h2>
-              {!isStandalone && (
-                <p className="text-base sm:text-xl text-blue-200 max-w-2xl mx-auto">
-                  Add to home screen to start buying and earning. No KYC required, just connect your wallet and start earning competitive yields on Base.
-                </p>
-              )}
-            </div>
-
-            {isStandalone ? (
-              /* Token sections - Only shown in standalone mode */
-              <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
-                <TokenSection
-                  token="USDC"
-                  vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
-                />
-                <TokenSection
-                  token="cbBTC"
-                  vaultAddress={"0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796" as `0x${string}`}
-                />
-              </div>
-            ) : (
-              /* Info sections - Only shown in browser mode */
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Image 
-                      src={tokenConfigs.USDC.image}
-                      alt="USDC"
-                      width={32}
-                      height={32}
-                      className="w-8 h-8"
-                      unoptimized
-                    />
-                    <h3 className="text-xl font-bold">USDC</h3>
-                  </div>
-                  <p className="text-blue-200 mb-2">• Buy instantly with card or Coinbase account</p>
-                  <p className="text-blue-200 mb-2">• Earn {8.44}% APY through Morpho</p>
-                  <p className="text-blue-200">• Withdraw anytime, no lockup period</p>
+      {isStandalone ? (
+        // Full app view when launched from home screen
+        <>
+          <FloatingLogos />
+          <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
+            <div className="container mx-auto px-2 sm:px-4 max-w-6xl">
+              {/* Header with wallet */}
+              <header className="pt-12 sm:pt-6 pb-4 sm:pb-6 flex justify-center items-center relative z-40">
+                <div className="wallet-container scale-90 sm:scale-100 origin-center">
+                  <Wallet>
+                    <ConnectWallet>
+                      <Avatar className="h-6 w-6" />
+                      <Name />
+                    </ConnectWallet>
+                    <WalletDropdown>
+                      <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
+                        <Avatar />
+                        <Name />
+                        <EthBalance />
+                      </Identity>
+                      <WalletDropdownDisconnect />
+                    </WalletDropdown>
+                  </Wallet>
                 </div>
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Image 
-                      src={tokenConfigs.cbBTC.image}
-                      alt="Bitcoin"
-                      width={32}
-                      height={32}
-                      className="w-8 h-8"
-                      unoptimized
-                    />
-                    <h3 className="text-xl font-bold">Bitcoin</h3>
-                  </div>
-                  <p className="text-blue-200 mb-2">• Buy BTC without exchange signup</p>
-                  <p className="text-blue-200 mb-2">• Earn yield on your Bitcoin</p>
-                  <p className="text-blue-200">• Fully backed by real BTC</p>
-                </div>
-              </div>
-            )}
+              </header>
 
-            {/* Features section - Always shown */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8 mt-6 sm:mt-16 relative z-10">
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">🔒 Secure by Design</h3>
-                <p className="text-sm sm:text-base text-blue-200">Built on Base with institutional-grade security. Your assets are protected by Coinbase&apos;s battle-tested infrastructure.</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">💰 Optimized Returns</h3>
-                <p className="text-sm sm:text-base text-blue-200">Earn competitive yields through Morpho&apos;s efficient lending protocol. Maximum returns with minimal risk.</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-6 transform hover:scale-105 transition-transform">
-                <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">⚡ Instant Access</h3>
-                <p className="text-sm sm:text-base text-blue-200">Buy tokens directly with your card or Coinbase account. Deposit and withdraw anytime with no lockup periods.</p>
-              </div>
+              {/* Main content */}
+              <main className="py-4 sm:py-12">
+                {/* Token sections */}
+                <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
+                  <TokenSection
+                    token="USDC"
+                    vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
+                  />
+                  <TokenSection
+                    token="cbBTC"
+                    vaultAddress={"0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796" as `0x${string}`}
+                  />
+                </div>
+              </main>
             </div>
-          </main>
+          </div>
+        </>
+      ) : (
+        // Simple welcome view when accessed via browser
+        <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white flex flex-col items-center justify-center px-4">
+          <div className="text-center max-w-md mx-auto">
+            <div className="flex justify-center gap-4 mb-8">
+              <Image 
+                src={tokenConfigs.USDC.image}
+                alt="USDC"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+                unoptimized
+              />
+              <Image 
+                src={tokenConfigs.cbBTC.image}
+                alt="Bitcoin"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+                unoptimized
+              />
+            </div>
+            <h1 className="text-2xl font-bold mb-4">
+              Buy & Earn on Base
+            </h1>
+            <p className="text-blue-200 mb-6">
+              Instantly buy USDC and BTC without KYC, then earn yield on Base.
+            </p>
+            <div className="animate-pulse text-sm text-blue-300">
+              Add to home screen to start →
+            </div>
+          </div>
         </div>
-      </div>
+      )}
       <AddToHomeScreen />
     </OnchainKitProvider>
   );
