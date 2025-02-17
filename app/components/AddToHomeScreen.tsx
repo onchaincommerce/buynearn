@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export default function AddToHomeScreen() {
   const [showPrompt, setShowPrompt] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Check if already installed or in standalone mode
@@ -10,11 +11,15 @@ export default function AddToHomeScreen() {
                               (window.navigator as any).standalone || 
                               document.referrer.includes('android-app://');
     
-    setIsStandalone(isInStandaloneMode);
+    // Check if on mobile device
+    const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
-    // Show prompt if not installed and not dismissed before
+    setIsStandalone(isInStandaloneMode);
+    setIsMobile(isMobileDevice);
+    
+    // Show prompt if on mobile, not installed, and not dismissed before
     const hasPromptBeenShown = localStorage.getItem('pwaPromptShown');
-    if (!isInStandaloneMode && !hasPromptBeenShown) {
+    if (isMobileDevice && !isInStandaloneMode && !hasPromptBeenShown) {
       setTimeout(() => setShowPrompt(true), 1000);
     }
   }, []);
@@ -24,7 +29,7 @@ export default function AddToHomeScreen() {
     localStorage.setItem('pwaPromptShown', 'true');
   };
 
-  if (!showPrompt || isStandalone) return null;
+  if (!showPrompt || !isMobile || isStandalone) return null;
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 

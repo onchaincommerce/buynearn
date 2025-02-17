@@ -127,14 +127,25 @@ function FloatingLogos() {
 
 export default function App() {
   const [isStandalone, setIsStandalone] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Check if in standalone mode
     const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || 
                               (window.navigator as any).standalone || 
                               document.referrer.includes('android-app://');
+    
+    // Check if on mobile device
+    const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
     setIsStandalone(isInStandaloneMode);
+    setIsMobile(isMobileDevice);
   }, []);
+
+  // Show full app if:
+  // 1. On desktop (not mobile) OR
+  // 2. On mobile AND launched from home screen
+  const shouldShowFullApp = !isMobile || (isMobile && isStandalone);
 
   return (
     <OnchainKitProvider 
@@ -142,8 +153,8 @@ export default function App() {
       projectId={process.env.NEXT_PUBLIC_COINBASE_SPONSORED_PROJECT_ID}
       apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
     >
-      {isStandalone ? (
-        // Full app view when launched from home screen
+      {shouldShowFullApp ? (
+        // Full app view when on desktop or launched from home screen on mobile
         <>
           <FloatingLogos />
           <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
@@ -186,7 +197,7 @@ export default function App() {
           </div>
         </>
       ) : (
-        // Simple welcome view when accessed via browser
+        // Simple welcome view when accessed via mobile browser
         <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white flex flex-col items-center justify-center px-4">
           <div className="text-center max-w-md mx-auto">
             <div className="flex justify-center gap-4 mb-8">
@@ -219,7 +230,7 @@ export default function App() {
           </div>
         </div>
       )}
-      <AddToHomeScreen />
+      {isMobile && <AddToHomeScreen />}
     </OnchainKitProvider>
   );
 }
