@@ -5,11 +5,11 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 interface TokenSectionProps {
-  token: 'USDC' | 'cbBTC'
+  token: 'USDC' | 'cbBTC' | 'ETH'
   vaultAddress: `0x${string}`
 }
 
-export const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> = {
+export const tokenConfigs: Record<'USDC' | 'cbBTC' | 'ETH', Token & { image: string }> = {
   USDC: {
     name: 'USDC',
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
@@ -25,6 +25,14 @@ export const tokenConfigs: Record<'USDC' | 'cbBTC', Token & { image: string }> =
     decimals: 8,
     chainId: 8453,
     image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+  },
+  ETH: {
+    name: 'Ethereum',
+    address: '0x4200000000000000000000000000000000000006',
+    symbol: 'ETH',
+    decimals: 18,
+    chainId: 8453,
+    image: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
   }
 }
 
@@ -60,6 +68,20 @@ const vaultConfigs = {
       address: '0x6770216aC60F634483Ec073cBABC4011c94307Cb' as `0x${string}`,
       name: 'Morpho Vault 3'
     }
+  ],
+  ETH: [
+    {
+      address: '0x2371e134e3455e0593363cBF89d3b6cf53740618' as `0x${string}`,
+      name: 'Morpho Vault 1'
+    },
+    {
+      address: '0x78Fc2c2eD1A4cDb5402365934aE5648aDAd094d0' as `0x${string}`,
+      name: 'Morpho Vault 2'
+    },
+    {
+      address: '0xBEEf050ecd6a16c4e7bfFbB52Ebba7846C4b8cD4' as `0x${string}`,
+      name: 'Morpho Vault 3'
+    }
   ]
 };
 
@@ -69,15 +91,21 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
     vaultConfigs[token].find(v => v.address === defaultVaultAddress) || vaultConfigs[token][0]
   );
 
+  const gradientColors = {
+    USDC: 'from-blue-500/20 to-green-500/20',
+    cbBTC: 'from-orange-500/20 to-yellow-500/20',
+    ETH: 'from-purple-500/20 to-blue-400/20'
+  };
+
   return (
     <div 
-      className="relative overflow-visible w-full max-w-md mx-auto p-1.5 sm:p-6 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105"
+      className="relative overflow-visible w-full max-w-md mx-auto p-1.5 sm:p-6 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105 touch-pan-x"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ isolation: 'isolate' }}
     >
       {/* Background animation - only show on desktop */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${token === 'USDC' ? 'from-blue-500/20 to-green-500/20' : 'from-orange-500/20 to-yellow-500/20'} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-lg sm:rounded-2xl hidden sm:block`} />
+      <div className={`absolute inset-0 bg-gradient-to-r ${gradientColors[token]} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-lg sm:rounded-2xl hidden sm:block`} />
 
       {/* Content */}
       <div className="relative z-10">

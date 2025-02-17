@@ -18,6 +18,7 @@ import { base } from 'viem/chains';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AddToHomeScreen from './components/AddToHomeScreen';
+import TokenCarousel from './components/TokenCarousel';
 
 function FloatingLogos() {
   const baseLogoRef = useRef<HTMLImageElement>(null);
@@ -182,16 +183,24 @@ export default function App() {
               {/* Main content */}
               <main className="py-4 sm:py-12">
                 {/* Token sections */}
-                <div className="flex flex-col md:grid md:grid-cols-2 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
-                  <TokenSection
-                    token="USDC"
-                    vaultAddress={"0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A" as `0x${string}`}
-                  />
-                  <TokenSection
-                    token="cbBTC"
-                    vaultAddress={"0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796" as `0x${string}`}
-                  />
-                </div>
+                {isMobile ? (
+                  <TokenCarousel />
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
+                    <TokenSection
+                      token="USDC"
+                      vaultAddress="0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A"
+                    />
+                    <TokenSection
+                      token="cbBTC"
+                      vaultAddress="0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796"
+                    />
+                    <TokenSection
+                      token="ETH"
+                      vaultAddress="0x2371e134e3455e0593363cBF89d3b6cf53740618"
+                    />
+                  </div>
+                )}
               </main>
             </div>
           </div>
@@ -217,12 +226,20 @@ export default function App() {
                 className="w-10 h-10"
                 unoptimized
               />
+              <Image 
+                src={tokenConfigs.ETH.image}
+                alt="Ethereum"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+                unoptimized
+              />
             </div>
             <h1 className="text-2xl font-bold mb-4">
               Buy & Earn on Base
             </h1>
             <p className="text-blue-200 mb-6">
-              Instantly buy USDC and BTC without KYC, then earn yield on Base.
+              Instantly buy USDC, BTC, and ETH without KYC, then earn yield on Base.
             </p>
             <div className="animate-pulse text-sm text-blue-300">
               Add to home screen to start →
