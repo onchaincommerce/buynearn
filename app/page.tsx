@@ -18,6 +18,7 @@ import { base } from 'viem/chains';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AddToHomeScreen from './components/AddToHomeScreen';
+import CurrencySelector from './components/CurrencySelector';
 
 function FloatingLogos() {
   const baseLogoRef = useRef<HTMLImageElement>(null);
@@ -182,20 +183,9 @@ export default function App() {
               {/* Main content */}
               <main className="py-4 sm:py-12">
                 {isMobile ? (
-                  // Mobile vertical layout
-                  <div className="space-y-4 mt-4 pb-20">
-                    <TokenSection
-                      token="USDC"
-                      vaultAddress="0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A"
-                    />
-                    <TokenSection
-                      token="cbBTC"
-                      vaultAddress="0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796"
-                    />
-                    <TokenSection
-                      token="ETH"
-                      vaultAddress="0x2371e134e3455e0593363cBF89d3b6cf53740618"
-                    />
+                  // Mobile vertical layout - now using CurrencySelector
+                  <div className="mt-4 pb-20">
+                    <CurrencySelector />
                   </div>
                 ) : (
                   // Desktop grid layout

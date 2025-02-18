@@ -109,7 +109,7 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
       <div className={`absolute inset-0 bg-gradient-to-r ${gradientColors[token]} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-xl sm:rounded-2xl hidden sm:block`} />
 
       {/* Content */}
-      <div className="relative z-10 p-4 sm:p-6">
+      <div className="relative z-10 p-3 sm:p-6">
         <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center gap-2 sm:gap-4">
             <Image 
@@ -121,7 +121,7 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
               unoptimized
             />
             <h2 className="text-xl sm:text-2xl font-bold text-white">
-              {tokenConfigs[token].name}
+              {token === 'cbBTC' ? 'Bitcoin' : tokenConfigs[token].name}
             </h2>
           </div>
           
@@ -129,14 +129,14 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
             vaults={vaultConfigs[token]}
             selectedVault={selectedVault}
             onSelect={setSelectedVault}
-            token={tokenConfigs[token].name}
+            token={token === 'cbBTC' ? 'BTC' : token}
           />
         </div>
 
         {/* Component Display */}
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-3 sm:space-y-6">
           {/* Earn Component */}
-          <div className="relative bg-white/5 rounded-xl overflow-hidden">
+          <div className="relative bg-white/5 rounded-xl overflow-hidden -mx-1">
             <div className="scale-[0.95] origin-top p-2">
               <Earn vaultAddress={selectedVault.address} />
             </div>
