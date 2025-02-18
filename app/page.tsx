@@ -18,7 +18,6 @@ import { base } from 'viem/chains';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AddToHomeScreen from './components/AddToHomeScreen';
-import TokenCarousel from './components/TokenCarousel';
 
 function FloatingLogos() {
   const baseLogoRef = useRef<HTMLImageElement>(null);
@@ -182,10 +181,24 @@ export default function App() {
 
               {/* Main content */}
               <main className="py-4 sm:py-12">
-                {/* Token sections */}
                 {isMobile ? (
-                  <TokenCarousel />
+                  // Mobile vertical layout
+                  <div className="space-y-4 mt-4 pb-20">
+                    <TokenSection
+                      token="USDC"
+                      vaultAddress="0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A"
+                    />
+                    <TokenSection
+                      token="cbBTC"
+                      vaultAddress="0x543257eF2161176D7C8cD90BA65C2d4CaEF5a796"
+                    />
+                    <TokenSection
+                      token="ETH"
+                      vaultAddress="0x2371e134e3455e0593363cBF89d3b6cf53740618"
+                    />
+                  </div>
                 ) : (
+                  // Desktop grid layout
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-8 mt-4 sm:mt-8 relative z-20">
                     <TokenSection
                       token="USDC"

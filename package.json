@@ -11,6 +11,7 @@
   "dependencies": {
     "@coinbase/onchainkit": "latest",
     "@tanstack/react-query": "^5",
+    "framer-motion": "^12.4.3",
     "next": "14.2.15",
     "next-pwa": "^5.6.0",
     "react": "^18",

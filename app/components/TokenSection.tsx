@@ -3,6 +3,7 @@ import { Earn } from '@coinbase/onchainkit/earn'
 import type { Token } from '@coinbase/onchainkit/token'
 import { useState } from 'react'
 import Image from 'next/image'
+import VaultSelector from './VaultSelector'
 
 interface TokenSectionProps {
   token: 'USDC' | 'cbBTC' | 'ETH'
@@ -99,17 +100,17 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
 
   return (
     <div 
-      className="relative overflow-visible w-full max-w-md mx-auto p-2 sm:p-8 rounded-lg sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-105 touch-pan-x"
+      className="relative w-full max-w-md mx-auto rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 shadow-2xl transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ isolation: 'isolate' }}
     >
       {/* Background animation - only show on desktop */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${gradientColors[token]} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-lg sm:rounded-2xl hidden sm:block`} />
+      <div className={`absolute inset-0 bg-gradient-to-r ${gradientColors[token]} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'} rounded-xl sm:rounded-2xl hidden sm:block`} />
 
       {/* Content */}
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-3 sm:mb-8">
+      <div className="relative z-10 p-4 sm:p-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center gap-2 sm:gap-4">
             <Image 
               src={tokenConfigs[token].image}
@@ -119,61 +120,31 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
               className="w-8 h-8 sm:w-10 sm:h-10"
               unoptimized
             />
-            <h2 className="text-xl sm:text-3xl font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               {tokenConfigs[token].name}
             </h2>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <div className="relative group">
-              <select
-                value={selectedVault.address}
-                onChange={(e) => setSelectedVault(vaultConfigs[token].find(v => v.address === e.target.value)!)}
-                className="appearance-none text-sm sm:text-base px-3 py-1.5 pr-8 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer backdrop-blur-sm hover:bg-white/20 transition-colors"
-                style={{
-                  WebkitAppearance: 'none',
-                  MozAppearance: 'none'
-                }}
-              >
-                {vaultConfigs[token].map((vault) => (
-                  <option 
-                    key={vault.address} 
-                    value={vault.address} 
-                    className="bg-gray-900/95 backdrop-blur-sm"
-                  >
-                    {vault.name}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-white/80">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="transition-transform group-hover:translate-y-0.5"
-                >
-                  <path d="m6 9 6 6 6-6"/>
-                </svg>
-              </div>
-            </div>
-            <div className="text-xs sm:text-sm text-blue-200 opacity-75">
-              {vaultConfigs[token].length} vaults available
-            </div>
-          </div>
+          
+          <VaultSelector
+            vaults={vaultConfigs[token]}
+            selectedVault={selectedVault}
+            onSelect={setSelectedVault}
+            token={tokenConfigs[token].name}
+          />
         </div>
 
         {/* Component Display */}
-        <div className="transition-all duration-300 [&>div]:!static [&>div]:!w-full [&>div]:!max-w-full">
-          <div className="animate-fadeIn space-y-4 sm:space-y-6">
-            <div className="scale-[0.95] sm:scale-100 origin-top relative z-20">
+        <div className="space-y-4 sm:space-y-6 [&>div]:!w-full [&>div]:!max-w-full">
+          {/* Earn Component */}
+          <div className="relative bg-white/5 rounded-xl p-3 sm:p-4 overflow-hidden">
+            <div className="scale-[0.98] origin-top">
               <Earn vaultAddress={selectedVault.address} />
             </div>
-            <div className="mt-4 sm:mt-10 scale-[0.95] sm:scale-100 origin-top relative z-30">
+          </div>
+
+          {/* Buy Component */}
+          <div className="relative bg-white/5 rounded-xl p-3 sm:p-4 overflow-hidden">
+            <div className="scale-[0.98] origin-top">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored
@@ -183,5 +154,5 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
         </div>
       </div>
     </div>
-  )
+  );
 } 
