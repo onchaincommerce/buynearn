@@ -182,7 +182,9 @@ export default function App() {
 
               {/* Main content */}
               <main className="py-4 sm:py-12">
-                <CurrencySelector />
+                <div className="mt-4 pb-20">
+                  <CurrencySelector />
+                </div>
               </main>
             </div>
           </div>
