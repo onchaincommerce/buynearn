@@ -143,7 +143,7 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
           </div>
 
           {/* Buy Component */}
-          <div className="relative bg-white/5 rounded-xl overflow-hidden [&_*]:!z-[100]">
+          <div className="relative bg-white/5 rounded-xl overflow-visible">
             <div className="scale-[0.95] origin-top p-2">
               <Buy 
                 toToken={tokenConfigs[token]} 
@@ -156,9 +156,24 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
 
       {/* Style overrides for Buy dropdown */}
       <style jsx global>{`
-        /* Ensure Buy dropdown is always on top */
-        .onchainkit-buy-dropdown {
-          z-index: 1000 !important;
+        /* Ensure Buy dropdown and payment methods are always on top */
+        .onchainkit-buy-dropdown,
+        .onchainkit-buy-payment-methods-dropdown,
+        .onchainkit-buy-payment-methods-list {
+          z-index: 9999 !important;
+          position: relative !important;
+        }
+
+        /* Ensure payment method buttons are visible */
+        .onchainkit-buy-payment-method-button {
+          z-index: 9999 !important;
+          position: relative !important;
+        }
+
+        /* Fix dropdown positioning */
+        .onchainkit-buy-dropdown-content {
+          position: absolute !important;
+          z-index: 9999 !important;
         }
         
         /* Adjust Earn component spacing */
@@ -173,6 +188,24 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
           width: 100% !important;
           max-width: 100% !important;
           overflow: visible !important;
+        }
+
+        /* Ensure proper stacking context */
+        .onchainkit-buy-container {
+          position: relative !important;
+          z-index: 1 !important;
+        }
+
+        /* Override any conflicting styles */
+        .onchainkit-buy-container * {
+          z-index: auto !important;
+        }
+
+        /* Ensure dropdowns appear above everything */
+        body > div[role="dialog"],
+        body > .onchainkit-buy-dropdown,
+        body > .onchainkit-buy-payment-methods-dropdown {
+          z-index: 9999 !important;
         }
       `}</style>
     </div>
