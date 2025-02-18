@@ -134,17 +134,17 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
         </div>
 
         {/* Component Display */}
-        <div className="space-y-4 sm:space-y-6 [&>div]:!w-full [&>div]:!max-w-full">
+        <div className="space-y-4 sm:space-y-6">
           {/* Earn Component */}
-          <div className="relative bg-white/5 rounded-xl p-3 sm:p-4 overflow-hidden">
-            <div className="scale-[0.98] origin-top">
+          <div className="relative bg-white/5 rounded-xl overflow-hidden">
+            <div className="scale-[0.95] origin-top p-2">
               <Earn vaultAddress={selectedVault.address} />
             </div>
           </div>
 
           {/* Buy Component */}
-          <div className="relative bg-white/5 rounded-xl p-3 sm:p-4 overflow-hidden">
-            <div className="scale-[0.98] origin-top">
+          <div className="relative bg-white/5 rounded-xl overflow-hidden [&_*]:!z-[100]">
+            <div className="scale-[0.95] origin-top p-2">
               <Buy 
                 toToken={tokenConfigs[token]} 
                 isSponsored
@@ -153,6 +153,28 @@ export default function TokenSection({ token, vaultAddress: defaultVaultAddress 
           </div>
         </div>
       </div>
+
+      {/* Style overrides for Buy dropdown */}
+      <style jsx global>{`
+        /* Ensure Buy dropdown is always on top */
+        .onchainkit-buy-dropdown {
+          z-index: 1000 !important;
+        }
+        
+        /* Adjust Earn component spacing */
+        .onchainkit-earn-container {
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100% !important;
+        }
+        
+        /* Fix any potential overflow issues */
+        .onchainkit-earn-container > div {
+          width: 100% !important;
+          max-width: 100% !important;
+          overflow: visible !important;
+        }
+      `}</style>
     </div>
   );
 } 
