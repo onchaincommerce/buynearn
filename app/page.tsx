@@ -180,7 +180,7 @@ export default function App() {
                 </div>
               </header>
 
-              {/* Main content */}
+              {/* Main content - Currency Selector for all views */}
               <main className="py-4 sm:py-12">
                 <div className="mt-4 pb-20">
                   <CurrencySelector />
